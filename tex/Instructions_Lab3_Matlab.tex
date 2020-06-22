@@ -44,7 +44,7 @@
 \begin{document}
 
 \noindent\textbf{Regularization Methods for Machine Learning} \hfill Jul 2, 2020\\
-RegML 2020, Genova, Italy \\ \rule{\textwidth}{1pt}
+RegML 20, Genova, Italy \\ \rule{\textwidth}{1pt}
 
 \mytitle{LAB 3: Sparsity-based learning}\\
 \rule{\textwidth}{1pt}
@@ -63,8 +63,7 @@ Your goal is to entirely complete at least one of the two parts.
 \begin{framed}
 \textbf{\textbf{Setup instructions}:} \\
 \textit{Running \MATLAB}
-
- Download the file \texttt{regml2018\_lab3.zip} from the syllabus on the course website (\url{http://lcsl.mit.edu/courses/regml/regml2018/\#syllabus}), extract it and add all the sub-folders to the \MATLAB path. This file includes all the code you need!
+Clone or download the course repository at \url{https://github.com/LCSL/RegML}. Add all the subfolders to the \MATLAB path. The repo includes all the files you need!
 \end{framed}
 
 %\pagebreak
@@ -84,19 +83,8 @@ In the code we use different notation from what you have seen in class. Namely, 
 \end{equation*}
 where $X \in \mathbb{R}^{n \times p}$ and $Y \in \mathbb{R}^n$.
 
-Furthermore, the sparsity parameter \texttt{L1\_par} is, in some of the code, denoted by \texttt{tau}, while the smoothing parameter \texttt{L2\_par} can be reffered to as \texttt{smooth\_par}.
+Furthermore, the sparsity parameter \texttt{L1\_par} is, in some of the code, denoted by \texttt{tau}, while the smoothing parameter \texttt{L2\_par} can be referred to as \texttt{smooth\_par}.
 \end{framed}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -170,24 +158,7 @@ You can use it as a basis for writing your own code.
 	In particular, look at how do the results behave when $p\gg n$, depending whether $s<n$ holds or not (e.g. try $n=80$ and $p=300$).
   Try to identify different regimes.
 
-%\begin{itemize}
-% \item Set $p\ll n$ and $s>n$ (is it possible?)
-%  \item Set $p\gg n$ and $s>n$
-%  \item Set $p\gg n$ and $s<n$
-%\end{itemize}
-
 \end{itemize}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -199,9 +170,9 @@ You can use it as a basis for writing your own code.
 
 From now on do not use the GUI.
 
-Import the classification dataset given in \texttt{part3-data.mat}, which contains two matrices: \texttt{X} and \texttt{Y}.
+Import the classification dataset \texttt{part3-data.mat} given in the \texttt{data} folder at the root of the repo, which contains two matrices: \texttt{X} and \texttt{Y}.
 For this you can just double click on it in the file explorer, or otherwise write\\
-\mcode{temp=load('part3-data.mat'); X=temp.X; Y=temp.Y;}
+\mcode{temp=load('../../data/part3-data.mat'); X=temp.X; Y=temp.Y;}
 
 Here $X \in \mathbb{R}^{n \times p}$ is a matrix containing $n$ points in $\mathbb{R}^p$, and $Y \in \{-1;+1\}^n$ is generated from $Y=X \beta$, where $\beta \in \mathbb{R}^p$ is an $s$-sparse vector, meaning that it has $s$ nonzero components, with $s$ being small.
 

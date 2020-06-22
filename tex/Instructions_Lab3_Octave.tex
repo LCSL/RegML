@@ -41,15 +41,15 @@
 %===================================
 \begin{document}
 
-\noindent\textbf{Regularization Methods for Machine Learning} \hfill Jun 21, 2018\\
-RegML 2018, Genova, Italy \\ \rule{\textwidth}{1pt}
+\noindent\textbf{Regularization Methods for Machine Learning} \hfill Jul 2, 2020\\
+RegML 2020, Genova, Italy \\ \rule{\textwidth}{1pt}
 
 \mytitle{LAB 3: Sparsity-based learning}\\
 \rule{\textwidth}{1pt}
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
   \item This lab is about feature selection within the framework of sparsity based regularization, using elastic net regularization.
   \item The aim of the lab is to play with the libraries and to get a practical grasp of what we have discussed in class.
-  \item Follow the instructions below. 
+  \item Follow the instructions below.
 \end{itemize}
 
 \begin{framed}
@@ -60,11 +60,9 @@ This lab is divided in two parts depending of their level of complexity (\textbf
 \begin{framed}
 \textbf{\textbf{Setup instructions}:} \\
 \textit{Running OCTAVE}
-
- Download the file \texttt{regml2018\_lab3.zip} from the syllabus on the course website (\url{http://lcsl.mit.edu/courses/regml/regml2018/\#syllabus}), extract it and add all the sub-folders to the OCTAVE path. This file includes all the code you need!
+Clone or download the course repository at \url{https://github.com/LCSL/RegML}. Add all the subfolders to the Octave path. The repo includes all the files you need!
 \end{framed}
 
-%\pagebreak
 \mysection{Toy problem}
 
 We focus on a regression problem where the target function is linear. We will consider synthetic data generated (randomly sampled) according to a given probability distribution and affected by noise. You will have the possibility of controlling the sizes of training and test sets, data dimensionality and number of relevant features.
@@ -100,18 +98,18 @@ The objective of this section is to familiarize you with the code.
 	The first figure displays the cross validation error together with the test error.
 	The second figure displays the sparsity of the reconstructed signal depending on the chosen \texttt{L1\_par}.
 	Compare the sparsity of the reconstructed signal with the original one.\\
-	\textbf{Note:} In this lab we perform regression and not classification. So the error is not a percentage error on the labels,  but is measured with quantities of the form $(1/n)\Vert X \beta_{pred} - Y \Vert^2$. 
-	
+	\textbf{Note:} In this lab we perform regression and not classification. So the error is not a percentage error on the labels,  but is measured with quantities of the form $(1/n)\Vert X \beta_{pred} - Y \Vert^2$.
+
 	\item \textbf{I.B} Train your dataset by changing now the values for \texttt{L1\_par} and \texttt{L2\_par} in \texttt{learnSparse\_octave.m}.
 	\begin{itemize}
 		\item \textbf{I.B1} With $\texttt{L2\_par}=0$ and playing with \texttt{L1\_par}, try to obtain a sparser or denser solution. How does the sparsity behave with respect to \texttt{L1\_par}?
 		\item \textbf{I.B2} Repeat the experiment with a $\texttt{L2\_par}>0$. How do test error and number of selected features vary?
-\end{itemize}		
-	
+\end{itemize}
+
 	\item \textbf{I.C} Repeat the experiments of I.B1, by considering this time a noisy dataset (you can take a noise parameter equal to 0.3).
-	How does now behave the sparsity? 
+	How does now behave the sparsity?
 	What can you say about the training error?
-	
+
 \end{itemize}
 
 
@@ -122,14 +120,14 @@ The objective of this section is to familiarize you with the code.
 Carry on the following experiments either using \texttt{loadSparseDataset\_octave.m} and \texttt{learnSparse\_octave.m}, when it is possible, or writing appropriate scripts.
 
 \begin{itemize}
-	
-	
-	\item \textbf{I.D} 	Back on the shell, have a look to the content of directory \texttt{./PROXIMAL\_} \texttt{TOOLBOXES/L1L2\_TOOLBOX}. 
+
+
+	\item \textbf{I.D} 	Back on the shell, have a look to the content of directory \texttt{./PROXIMAL\_} \texttt{TOOLBOXES/L1L2\_TOOLBOX}.
 	There you will find, among others, the code for  \mcode{l1l2\_algorithm} (used for variable selection), \mcode{l1l2\_kcv} (used for model selection with kcv or loo), \mcode{l1l2\_pred} (for prediction on a test set).
 
 For more information about the parameters and the usage of those scripts, use the help.
-	
-	
+
+
 Finally, you may want to have a look at file \texttt{l1l2\_demo\_simple.m} for a complete example of analysis.
 You might use it as a basis for writing your own script(s).
 
@@ -142,12 +140,12 @@ You might use it as a basis for writing your own script(s).
   \item \textbf{I.E2} When we change (increase or decrease) the regularization parameter \mcode{L2_par} associated with the $\ell_2$-norm.\\
   \textbf{Hint:} Try the following fixed parameters: 20 points of dimension 100, with 15 relevant features, a noise level equal to 1 and \mcode{L1_par}=0.1.
   \item \textbf{IE.3} The training set size grows (this is not the same than generating different training sets with an increasing size!).\\
-  \textbf{Hint:} Try the same parameters as above, with \mcode{L2_par}=0. 
+  \textbf{Hint:} Try the same parameters as above, with \mcode{L2_par}=0.
   \item \textbf{I.E4} The amount of noise on the generated data grows (the test set is generated with the same parameter of the training).
 \end{itemize}
 
 
-	
+
 
 	\item \textbf{I.F} \emph{(Large $p$ and small $n$)} Perform experiments similar to those above changing $p$ (dimensionality of the points), $n$ (number of training points) and $s$ (number of relevant variables).
 	In particular, when $p\gg n$, look at how the result behave, depending whether $s<n$ holds or no. (try e.g $n=80$ and $p=300$). Try to identify different regimes.
@@ -172,25 +170,25 @@ You might use it as a basis for writing your own script(s).
 
 From now you can only use your own scripts.
 
-Import the classification dataset given in \texttt{part3-data.mat}, which contains two matrices: \mcode{X} and \mcode{Y}.
-For this you can just double click on it in the file explorer, otherwise do:\\
-\mcode{temp=load('part3-data.mat'); X=temp.X; Y=temp.Y;}
+Import the classification dataset \texttt{part3-data.mat} given in the \texttt{data} folder at the root of the repo, which contains two matrices: \texttt{X} and \texttt{Y}.
+For this you can just double click on it in the file explorer, or otherwise write\\
+\mcode{temp=load('../../data/part3-data.mat'); X=temp.X; Y=temp.Y;}
 
 Here $X \in \mathbb{R}^{n \times p}$ is a matrix containing $n$ points in $\mathbb{R}^p$, and $Y \in \{-1;+1\}^n$ is generated from $Y=X \beta$, where $\beta \in \mathbb{R}^p$ is a sparse vector, meaning that it has $s$ nonzero components, with $s$ being small.
 
 \begin{itemize}
   \item \textbf{II.A} You do not know how many relevant features generated this data.
   Try to get an estimation of this number $s$, by using \mcode{l1l2_learn}, according to your observations in part I.
-  
+
   \item \textbf{II.B} An other way to try to estimate $s$ is to measure the correlation between the columns of $X$ and $Y$.
-  Indeed, the zero coefficients in $\beta$ will ignore the corresponding columns in $X$ while generating $Y$. 
+  Indeed, the zero coefficients in $\beta$ will ignore the corresponding columns in $X$ while generating $Y$.
   To do so, you might use\\
   \mcode{c=abs(corr(X,Y)); stairs(c);}\\
   If you do not see which columns of $X$ are the more correlated with $Y$, you can use \mcode{[\~,I]=sort(c);} to sort its values and identify the more relevant features.
 You should have now a precise idea of what is $s$.
-Can you also identify which are these $s$ features?  
-  
-  \item \textbf{II.C} Use again \mcode{l1l2_learn} and tune the sparsity parameter \texttt{L1\_par} in view to select only $s$ features ($s$ being your estimation from the previous question). 
+Can you also identify which are these $s$ features?
+
+  \item \textbf{II.C} Use again \mcode{l1l2_learn} and tune the sparsity parameter \texttt{L1\_par} in view to select only $s$ features ($s$ being your estimation from the previous question).
   Look at which are the selected features in this solution.
   Do they correspond to the ones you identified in II.B?
   If no, can you figure out why?\\
@@ -218,4 +216,4 @@ Can you also identify which are these $s$ features?
 %\textbf{Deadline:} 6:00 PM.
 %\end{framed}
 
-\end{document} 
+\end{document}
