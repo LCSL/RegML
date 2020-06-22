@@ -1,0 +1,184 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{framed}
+\usepackage{hyperref}
+
+
+% for matlab code
+% bw = blackwhite - optimized for print, otherwise source is colored
+\usepackage[framed,numbered,bw]{mcode}
+
+\lstset{breakatwhitespace=false}
+
+% for other code
+%\usepackage{listings}
+
+\setlength{\parindent}{0em}
+
+% set section in CM
+\setkomafont{section}{\normalfont\bfseries\Large}
+
+\newcommand{\mytitle}[1]{{\noindent\LARGE\textbf{#1}}}
+%\newcommand{\mysection}[1]{\large\textbf{\section*{#1}}}
+\newcommand{\mysection}[1]{\noindent\large\textbf{#1}}
+\newcommand{\mysubsection}[2]{\romannumeral #1) #2}
+
+
+%===================================
+\begin{document}
+
+\noindent\textbf{Regularization Methods for Machine Learning} \hfill Jun 18, 2018\\
+RegML 2018, Genova, Italy \\ \rule{\textwidth}{1pt}
+
+\mytitle{LAB 1: Binary classification and model selection}
+\rule{\textwidth}{1pt}
+\begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
+  \item This lab addresses binary classification and model selection on synthetic data.
+  \item The aim of the lab is to play with the libraries and to get a practical grasp of what we have discussed in class.
+  \item Follow the instructions below. 
+
+\end{itemize}
+
+\begin{framed}
+\textbf{\textbf{Goal}:} \\
+This lab is divided in three parts depending of their level of complexity (\textbf{Beginner}, \textbf{Intermediate}, \textbf{Advanced}). Your goal is to complete entirely, at least, one of the three parts.
+\end{framed}
+
+
+\begin{framed}
+\textbf{\textbf{Setup instructions}:} \\
+\textit{Running OCTAVE}
+
+ Download the file \texttt{regml2018\_lab1.zip} from the syllabus on the course website (\url{http://lcsl.mit.edu/courses/regml/regml2018/\#syllabus}), extract it and add all the sub-folders to the OCTAVE path. This file includes all the code you need!
+\end{framed}
+
+\pagebreak
+\begin{center}
+\large\textbf{PART I: Beginner}
+\end{center}
+
+\mysection{Overture: Warm up}
+
+\noindent Open the files \texttt{loadDataset\_octave.m} and \texttt{learn\_octave.m} in Octave.
+Look at the code, and see that the first lines are dedicated to the set up of various options and parameters.
+The objective of this section is to familiarize you with the code.
+
+\begin{itemize}
+	\item \textbf{I.A} In \texttt{loadDataset\_octave.m}, look at the parameters and modify them to generate a simulated classification dataset of type \textit{Linear}.
+	To do so, after changing the parameters and saving \texttt{loadDataset\_octave.m}, execute it directly from Octave's interface, or type \texttt{loadDataset\_octave;} in the shell.
+	See how the number of wrong labels affects the data set.
+	You can also look at the other types of datasets, which are nonlinear.\\
+	\textbf{Hint:} If too many figures are opened at the same time, you can close them all at once with the command \mcode{close all}.
+	\item \textbf{I.B} From now, consider a \textit{Linear} dataset, with 100 (resp. 1000) training (resp. test) samples, and some errors in the labels. 
+	Use \texttt{learn\_octave.m} to find a  classifier for this dataset.
+	For this, take a \textit{regularized least squares} filter, associated to a \textit{linear} kernel, and use cross-validation to select the regularization parameter.
+	To run the learning algorithm, save \texttt{learn\_octave.m}, and execute it directly from Octave's interface, or type \texttt{learn\_octave;} in the shell.
+	Observe then the plot of the KCV error and the balance between training and test errors.
+	Also have a look at data set, where a separation function has now appeared.
+\end{itemize}
+
+\begin{framed}
+\textbf{NOTE:} \\
+In the code we use a different notation from the one you have seen in the classes. In the \emph{Regularized Least Squares} method (\texttt{rls.m}), the regularization parameter is \mcode{t} instead of $\lambda$.
+\end{framed}
+
+
+
+
+
+
+
+\mysection{Allegro con brio: Analysis}
+
+Carry on the following experiments either using \texttt{loadDataset\_octave.m} and \texttt{learn\_octave.m}, when it is possible, or writing appropriate scripts.
+
+\begin{itemize}
+	\item \textbf{I.C} Back in the shell, check the content of directory \texttt{./spectral\_reg} \texttt{\_toolbox}. 
+	There you will find, among others, the code for command \mcode{learn} (used for training), \mcode{patt\_rec} (used for testing), \mcode{kcv} (used for model selection on the training set).
+For more information about the parameters and the usage of those scripts, type:
+
+\mcode{help learn}\\
+\mcode{help patt_rec}\\
+\mcode{help kcv}
+
+
+Finally, you may want to have a look at the content of directory \texttt{./dataset\_scripts} and in particular to file \texttt{create\_dataset.m}, that  allows you to generate synthetic data of different kinds.
+	\item \textbf{I.D} Generate noisy data of \emph{Linear} type. Considering \emph{linear-RLS}, observe how the training and test errors change as:
+	
+\begin{itemize}
+  \item We change (increase or decrease) the regularization parameter \mcode{t}.
+  \item The training set size grows (try various choices of \mcode{n} as long as your computer supports you!).
+  \item The amount of errors in the labels in the generated data grows.
+\end{itemize}
+Run training and testing for various choices of the suggested parameters.
+
+	\item \textbf{I.E} Leaving all the other parameters fixed, choose an appropriate range for the regularization parameter, \mcode{tval=[t\_min:t\_step:t\_max]}, and plot the training and the test errors for each \mcode{t}. 
+For doing this, you might need the function \mcode{learn} that you saw in I.C:
+
+\mcode{[alpha, err] = learn('lin', [], 'rls', t, X, Y, 'class');}
+
+In this context, you can have access to the training and test errors corresponding to the parameter \mcode{t} with:
+
+\mcode{training_error = cell2mat(err);}\\
+\mcode{Y_learnt = kernel('lin', [], Xt, X) * cell2mat(alpha);}\\
+\mcode{test_error = learn_error(Y_learnt, Yt, 'class');}
+
+
+	
+	Use the KCV option to select by cross-validation the optimal regularization parameter, and see how it relates to your previous plot.
+	If you could, would you use the test error to select the parameter?
+	
+	\item \textbf{I.F} Leaving all the other parameters fixed, choose an appropriate range for the number of points in the training set, \mcode{nval=[n\_min:} \mcode{n\_step:n\_max]},  and plot the training and test errors.
+	 What do you observe as \mcode{n} $\rightarrow \infty$? 
+\end{itemize}
+
+
+
+
+
+\begin{center}
+\large\textbf{PART II: Intermediate}
+\end{center}
+
+\mysection{Crescendo: Advanced Analysis}
+
+\begin{itemize}
+	\item \textbf{II.A} Consider \emph{gaussian-RLS} and perform parameter tuning in this case. This time, together with the regularization parameter \mcode{t}, you'll have to choose an appropriate \mcode{sigma}, the kernel parameter.
+\begin{itemize}
+  \item Try some (\mcode{sigma}, \mcode{t}) pairs and compare the obtained training error  and test error.
+  \item Fix \mcode{t} and observe the effect of changing \mcode{sigma}.
+  \item Fix \mcode{sigma} and observe the effect of changing \mcode{t}.
+  \item Do you notice (and if so, when) any overfitting/oversmoothing effects?
+\end{itemize}
+  If you have time, you can try to plot the test error for a range of couples (\mcode{sigma}, \mcode{t}).
+
+	\item \textbf{II.B} Consider \emph{polynomial-RLS} and perform parameter tuning as in II.A. How does the choice of the kernel affect the learning behavior of the algorithm? In particular, compare the performances of the polynomial and Gaussian kernels on the \emph{spiral} and \emph{moons} datasets with respect to the number of examples in the training set (e.g. \mcode{[10, 20, 50, 100, 1000]}) and the value of the parameter regularization (e.g. \mcode{[0.5, 0.1, 0.01, 0.001, 0.0001]}).
+\end{itemize}
+
+
+
+\begin{center}
+\large\textbf{PART III: Advanced}
+\end{center}
+
+\mysection{Finale: The Challenge}
+
+The challenge consists in a learning task using a real dataset, namely \emph{USPS (United States Postal Service)}: This dataset contains a number of handwritten digits images. The problem is to train \emph{the best classifier} that is able to discriminate between the digits \fbox{\texttt{1}} and \fbox{\texttt{7}}.
+
+Once the classifiers are trained, they must be exported by means of the script \texttt{save\_challenge\_lab1}   (to see how to use it, look at its code). The file \texttt{demo\_lab1.m} contains a code snippet to perform a simple binary classification task by means of the previously presented scripts.
+
+\begin{framed}
+\textbf{Submission:}
+You should drop your results in a matrix file named \texttt{name-surname} to the link: \url{https://www.dropbox.com/request/j2z8yMoIjBxyfbRKaF6s} by the end of the challenge session.\\
+The results will be presented during the next class. The score of your result will be based on the accuracy of the classifier on a \textit{completely independently sampled} test set.
+
+\textbf{Deadline:} 6:00 PM.
+\end{framed}
+
+\end{document} 
