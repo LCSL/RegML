@@ -41,7 +41,7 @@ RegML 2018, Genova, Italy \\ \rule{\textwidth}{1pt}
 \begin{itemize}\itemsep1pt \parskip0pt \parsep0pt
   \item This lab addresses binary classification and model selection on synthetic data.
   \item The aim of the lab is to play with the libraries and to get a practical grasp of what we have discussed in class.
-  \item Follow the instructions below. 
+  \item Follow the instructions below.
 
 \end{itemize}
 
@@ -75,7 +75,7 @@ The objective of this section is to familiarize you with the code.
 	See how the number of wrong labels affects the data set.
 	You can also look at the other types of datasets, which are nonlinear.\\
 	\textbf{Hint:} If too many figures are opened at the same time, you can close them all at once with the command \mcode{close all}.
-	\item \textbf{I.B} From now, consider a \textit{Linear} dataset, with 100 (resp. 1000) training (resp. test) samples, and some errors in the labels. 
+	\item \textbf{I.B} From now, consider a \textit{Linear} dataset, with 100 (resp. 1000) training (resp. test) samples, and some errors in the labels.
 	Use \texttt{learn\_octave.m} to find a  classifier for this dataset.
 	For this, take a \textit{regularized least squares} filter, associated to a \textit{linear} kernel, and use cross-validation to select the regularization parameter.
 	To run the learning algorithm, save \texttt{learn\_octave.m}, and execute it directly from Octave's interface, or type \texttt{learn\_octave;} in the shell.
@@ -99,7 +99,7 @@ In the code we use a different notation from the one you have seen in the classe
 Carry on the following experiments either using \texttt{loadDataset\_octave.m} and \texttt{learn\_octave.m}, when it is possible, or writing appropriate scripts.
 
 \begin{itemize}
-	\item \textbf{I.C} Back in the shell, check the content of directory \texttt{./spectral\_reg} \texttt{\_toolbox}. 
+	\item \textbf{I.C} Back in the shell, check the content of directory \texttt{./spectral\_reg} \texttt{\_toolbox}.
 	There you will find, among others, the code for command \mcode{learn} (used for training), \mcode{patt\_rec} (used for testing), \mcode{kcv} (used for model selection on the training set).
 For more information about the parameters and the usage of those scripts, type:
 
@@ -110,7 +110,7 @@ For more information about the parameters and the usage of those scripts, type:
 
 Finally, you may want to have a look at the content of directory \texttt{./dataset\_scripts} and in particular to file \texttt{create\_dataset.m}, that  allows you to generate synthetic data of different kinds.
 	\item \textbf{I.D} Generate noisy data of \emph{Linear} type. Considering \emph{linear-RLS}, observe how the training and test errors change as:
-	
+
 \begin{itemize}
   \item We change (increase or decrease) the regularization parameter \mcode{t}.
   \item The training set size grows (try various choices of \mcode{n} as long as your computer supports you!).
@@ -118,7 +118,7 @@ Finally, you may want to have a look at the content of directory \texttt{./datas
 \end{itemize}
 Run training and testing for various choices of the suggested parameters.
 
-	\item \textbf{I.E} Leaving all the other parameters fixed, choose an appropriate range for the regularization parameter, \mcode{tval=[t\_min:t\_step:t\_max]}, and plot the training and the test errors for each \mcode{t}. 
+	\item \textbf{I.E} Leaving all the other parameters fixed, choose an appropriate range for the regularization parameter, \mcode{tval=[t\_min:t\_step:t\_max]}, and plot the training and the test errors for each \mcode{t}.
 For doing this, you might need the function \mcode{learn} that you saw in I.C:
 
 \mcode{[alpha, err] = learn('lin', [], 'rls', t, X, Y, 'class');}
@@ -130,12 +130,12 @@ In this context, you can have access to the training and test errors correspondi
 \mcode{test_error = learn_error(Y_learnt, Yt, 'class');}
 
 
-	
+
 	Use the KCV option to select by cross-validation the optimal regularization parameter, and see how it relates to your previous plot.
 	If you could, would you use the test error to select the parameter?
-	
+
 	\item \textbf{I.F} Leaving all the other parameters fixed, choose an appropriate range for the number of points in the training set, \mcode{nval=[n\_min:} \mcode{n\_step:n\_max]},  and plot the training and test errors.
-	 What do you observe as \mcode{n} $\rightarrow \infty$? 
+	 What do you observe as \mcode{n} $\rightarrow \infty$?
 \end{itemize}
 
 
@@ -175,10 +175,10 @@ Once the classifiers are trained, they must be exported by means of the script \
 
 \begin{framed}
 \textbf{Submission:}
-You should drop your results in a matrix file named \texttt{name-surname} to the link: \url{https://www.dropbox.com/request/j2z8yMoIjBxyfbRKaF6s} by the end of the challenge session.\\
+You should drop your results in a matrix file named \texttt{name-surname} to the link: \url{https://www.dropbox.com/request/K4vX1jIOGiX8hks6mtJF} by the end of the challenge session.\\
 The results will be presented during the next class. The score of your result will be based on the accuracy of the classifier on a \textit{completely independently sampled} test set.
 
 \textbf{Deadline:} 6:00 PM.
 \end{framed}
 
-\end{document} 
+\end{document}
