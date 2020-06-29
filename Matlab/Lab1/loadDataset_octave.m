@@ -33,7 +33,7 @@ filename = 'name of the file to load';
 
 
 addpath('./');
-addpath('./challenge_datasets');
+addpath('../../data');
 addpath('./dataGeneration');
 addpath('./dataset_scripts');
 addpath('./example_datasets');
