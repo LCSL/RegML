@@ -171,6 +171,8 @@ In this context, you can have access to the training and test errors correspondi
 
 The challenge consists in a learning task using a real dataset, namely \emph{USPS (United States Postal Service)}: This dataset contains a number of handwritten digits images. The problem is to train \emph{the best classifier} that is able to discriminate between the digits \fbox{\texttt{1}} and \fbox{\texttt{7}}.
 
+The data can be found in the \texttt{data} folder at the root of the git repository: load the files \texttt{one\_train.mat} (this should be labeled as $-1$), and \texttt{seven\_train.mat} (which should be labeled as $+1$) using the matlab \texttt{load} function.
+
 Once the classifiers are trained, they must be exported by means of the script \texttt{save\_challenge\_lab1}   (to see how to use it, look at its code). The file \texttt{demo\_lab1.m} contains a code snippet to perform a simple binary classification task by means of the previously presented scripts.
 
 \begin{framed}
