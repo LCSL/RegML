@@ -1,7 +1,5 @@
 clc,clear,close all;
 
-rng(3);
-
 %% Import the libraries
     addpath('./spectral_reg_toolbox/');
     addpath('./dataset_scripts/');
