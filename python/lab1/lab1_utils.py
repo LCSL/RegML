@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 
 
-
 def _gen_linear_data(n_samples, noise_level):
     fst_half = n_samples // 2
     snd_half = n_samples - fst_half
@@ -16,16 +15,21 @@ def _gen_linear_data(n_samples, noise_level):
 
     return np.concatenate((X1, X2), 0), Y
 
+
 def _gen_moons(n_samples, noise_level):
-    X, Y = datasets.make_moons(n_samples=n_samples, shuffle=True, noise=noise_level)
+    X, Y = datasets.make_moons(
+        n_samples=n_samples, shuffle=True, noise=noise_level)
     Y[Y == 0] = -1
 
     return X, Y
+
 
 def _gen_circles(n_samples, noise_level):
-    X, Y = datasets.make_circles(n_samples=n_samples, shuffle=True, noise=noise_level)
+    X, Y = datasets.make_circles(
+        n_samples=n_samples, shuffle=True, noise=noise_level)
     Y[Y == 0] = -1
     return X, Y
+
 
 def create_random_data(n_samples, noise_level, dataset="linear", seed=0):
     """Generates a random dataset. Can generate 'linear', 'moons' or 'circles'.
@@ -63,17 +67,18 @@ def create_random_data(n_samples, noise_level, dataset="linear", seed=0):
                           " 'linear', 'moons', 'circles'") % (dataset))
 
 
-def data_split(X, Y, n_train):
-    assert n_train < X.shape[0]
-    idx = np.arange(X.shape[0])
-    np.random.shuffle(idx)
-    return X[idx[:n_train], :], X[idx[n_train:], :], Y[idx[:n_train]], Y[idx[n_train:]]
+# def data_split(X, Y, n_train):
+#     assert n_train < X.shape[0]
+#     idx = np.arange(X.shape[0])
+#     np.random.shuffle(idx)
+#     return X[idx[:n_train], :], X[idx[n_train:], :], Y[idx[:n_train]], Y[idx[n_train:]]
 
 
 def plot_dataset(X, y):
     fig, ax = plt.subplots()
-    ax.scatter(X[y == -1][:,0], X[y == -1][:,1], alpha=0.5)
-    ax.scatter(X[y == 1][:,0], X[y == 1][:,1], alpha=0.5)
+    ax.scatter(X[y == -1][:, 0], X[y == -1][:, 1], alpha=0.5)
+    ax.scatter(X[y == 1][:, 0], X[y == 1][:, 1], alpha=0.5)
+
 
 def plot_separation(X, Y, model):
     # Plot the decision boundary. For that, we will assign a color to each
@@ -81,7 +86,8 @@ def plot_separation(X, Y, model):
     x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
     y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
     h = .02  # step size in the mesh
-    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                         np.arange(y_min, y_max, h))
     Z = model.predict(np.c_[xx.ravel(), yy.ravel()])
     Z[Z < 0] = -1
     Z[Z >= 0] = 1
